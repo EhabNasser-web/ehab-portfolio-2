@@ -25,7 +25,7 @@ export default function Header() {
           <span>EHAB</span>
         </Link>
         <nav className="nav-links" aria-label="Primary">
-          <NavLink to="/" className="nav-cell">{t.nav.work}{scribble}</NavLink>
+          <NavLink to="/" end className="nav-cell">{t.nav.work}{scribble}</NavLink>
           <NavLink to="/sidequests" className="nav-cell">{t.nav.sidequests}{scribble}</NavLink>
           <NavLink to="/about" className="nav-cell">{t.nav.about}{scribble}</NavLink>
         </nav>
