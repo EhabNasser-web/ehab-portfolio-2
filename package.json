@@ -1,0 +1,23 @@
+{
+  "name": "ehab-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ehab Nasser — Junior AI Automation & Agentic Engineer portfolio (EN/AR)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "serve -s dist -l tcp://0.0.0.0:$PORT"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.0",
+    "serve": "^14.2.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.8"
+  }
+}
