@@ -34,7 +34,7 @@ function Shell() {
         </Routes>
       </Suspense>
       <Footer />
-      <Mascot motionOff={motionOff} />
+      <Mascot motionOff={paused || reduced} />
       <Toggles paused={paused} setPaused={setPaused} lite={lite} />
     </BrowserRouter>
   );
