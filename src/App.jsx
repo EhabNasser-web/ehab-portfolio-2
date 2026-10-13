@@ -6,7 +6,6 @@ import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Preloader from './components/Preloader.jsx';
 import Cursor from './components/Cursor.jsx';
-import Mascot from './components/Mascot.jsx';
 import Toggles from './components/Toggles.jsx';
 
 const Home = lazy(() => import('./pages/Home.jsx'));
@@ -34,7 +33,6 @@ function Shell() {
         </Routes>
       </Suspense>
       <Footer />
-      <Mascot motionOff={paused || reduced} />
       <Toggles paused={paused} setPaused={setPaused} lite={lite} />
     </BrowserRouter>
   );
