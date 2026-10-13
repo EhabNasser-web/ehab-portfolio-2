@@ -143,6 +143,21 @@ footer{border-top:1px solid var(--line);padding:48px 0 90px;text-align:center}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;border-radius:12px}
 .crack-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .shatter-hint{display:block;margin-top:6px;font-size:.66rem;color:var(--muted)}
+/* ClayEhab mascot: companion + section walker (transform-only CSS motion) */
+.companion{position:fixed;bottom:14px;inset-inline-start:14px;width:88px;z-index:115;pointer-events:none;animation:fade .25s ease}
+.walker{position:fixed;bottom:18px;left:0;width:100px;z-index:115;pointer-events:none;will-change:transform}
+.mini{display:block;width:100%;height:auto;overflow:visible}
+.companion .mini{animation:mbob 2.6s ease-in-out infinite}
+.walk.mini{animation:mbob .34s ease-in-out infinite}
+@keyframes mbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.walk .leg-l{animation:mstep .34s ease-in-out infinite alternate}
+.walk .leg-r{animation:mstep .34s ease-in-out infinite alternate-reverse}
+@keyframes mstep{from{transform:translateY(0)}to{transform:translateY(-7px)}}
+.walk .arm-sw{transform-box:fill-box;transform-origin:50% 0%;animation:mswing .34s ease-in-out infinite alternate}
+.walk .arm-sw.rev{animation-direction:alternate-reverse}
+@keyframes mswing{from{transform:rotate(-18deg)}to{transform:rotate(18deg)}}
+.pose-wave .arm-wave{transform-box:fill-box;transform-origin:50% 100%;animation:mwave .55s ease-in-out infinite}
+@keyframes mwave{0%,100%{transform:rotate(-14deg)}50%{transform:rotate(14deg)}}
 .tape{position:absolute;top:-13px;width:92px;height:26px;background:rgba(255,230,128,.92);border:1px solid rgba(20,20,20,.25);z-index:2}
 .tape.t1{left:18px;transform:rotate(-8deg)}
 .tape.t2{right:18px;transform:rotate(7deg);background:rgba(191,231,255,.92)}
