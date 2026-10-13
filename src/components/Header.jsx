@@ -3,8 +3,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { useLang } from '../i18n/LangContext.jsx';
 
 const scribble = (
-  <svg className="scribble" viewBox="0 0 120 40" aria-hidden="true">
-    <path d="M8 22 C 25 6, 60 2, 112 12 C 118 20, 100 34, 40 36 C 18 37, 4 32, 10 18" />
+  <svg className="scribble" viewBox="0 0 120 44" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M10 24 C 14 10, 45 5, 75 6 C 105 7, 116 14, 113 24 C 110 35, 75 40, 45 39 C 20 38, 6 33, 9 22"
+      vectorEffect="non-scaling-stroke"
+    />
   </svg>
 );
 

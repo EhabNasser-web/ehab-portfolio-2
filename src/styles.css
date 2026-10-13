@@ -34,10 +34,11 @@ img,video{max-width:100%;display:block}
 .nav-links{display:flex;gap:8px;align-items:center}
 .nav-cell{border:1.5px solid var(--ink);border-radius:10px;padding:6px 12px;text-decoration:none;background:#fff;position:relative;font-family:var(--mono);font-size:.72rem}
 .nav-cell:hover{background:var(--yellow)}
-.nav-cell .scribble{position:absolute;inset:-7px;opacity:0;pointer-events:none}
-.nav-cell:hover .scribble,.nav-cell:focus-visible .scribble{opacity:1}
-.nav-cell .scribble path{stroke:var(--coral);stroke-width:2.5;fill:none;stroke-dasharray:300;stroke-dashoffset:300}
-.nav-cell:hover .scribble path{animation:draw .45s ease forwards}
+.nav-cell .scribble{position:absolute;left:-11px;right:-11px;top:-9px;bottom:-9px;width:auto;height:auto;opacity:0;pointer-events:none;overflow:visible}
+.nav-cell:hover .scribble,.nav-cell:focus-visible .scribble,.nav-cell.active .scribble{opacity:1}
+.nav-cell .scribble path{stroke:var(--coral);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:400}
+.nav-cell:hover .scribble path,.nav-cell:focus-visible .scribble path{animation:draw .5s ease forwards}
+.nav-cell.active .scribble path{stroke-dashoffset:0;animation:none}
 @keyframes draw{to{stroke-dashoffset:0}}
 .menu-btn{display:none;border:1.5px solid var(--ink);background:#fff;border-radius:10px;padding:8px 14px;font-family:var(--mono);font-size:.75rem}
 .mobile-menu{position:fixed;inset:0;background:var(--bg);z-index:80;display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -111,7 +112,17 @@ footer{border-top:1px solid var(--line);padding:48px 0 90px;text-align:center}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{border:1.5px solid var(--ink);border-radius:999px;padding:4px 12px;font-size:.8rem;background:#fff}
 .chip:nth-child(4n+1){background:var(--lime)}.chip:nth-child(4n+2){background:var(--sky)}.chip:nth-child(4n+3){background:var(--yellow)}.chip:nth-child(4n+4){background:#ffd7ec}
-/* timeline */
+/* playful polaroid-style photo card */
+.photo-card{position:relative;background:#fff;border:1.5px solid var(--ink);border-radius:var(--radius);padding:14px 14px 12px;margin:0 auto;max-width:400px;transform:rotate(-2.5deg);transition:transform .25s ease;box-shadow:7px 7px 0 var(--sky)}
+.photo-card:hover{transform:rotate(0deg)}
+.photo-card::before{content:"";position:absolute;inset:10px -10px -10px 10px;background:var(--lime);border:1.5px solid var(--ink);border-radius:var(--radius);z-index:-1;transform:rotate(4deg)}
+.photo-card img,.photo-card .photo-fallback{width:100%;height:auto;border-radius:12px;border:1.5px solid var(--ink);display:block;background:#BFE7FF}
+.photo-card figcaption{text-align:center;margin-top:10px;color:var(--muted)}
+.tape{position:absolute;top:-13px;width:92px;height:26px;background:rgba(255,230,128,.92);border:1px solid rgba(20,20,20,.25);z-index:2}
+.tape.t1{left:18px;transform:rotate(-8deg)}
+.tape.t2{right:18px;transform:rotate(7deg);background:rgba(191,231,255,.92)}
+[dir="rtl"] .tape.t1{left:auto;right:18px}
+[dir="rtl"] .tape.t2{right:auto;left:18px}
 .tl{border-inline-start:2px solid var(--ink);margin-inline-start:8px;padding-inline-start:18px;display:grid;gap:16px}
 .tl article{background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:12px 14px}
 /* phones */
