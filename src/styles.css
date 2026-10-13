@@ -87,10 +87,10 @@ html:not(.paused) .dot{animation:drift linear infinite alternate}
 .pcard .t{font-family:var(--mono);font-size:.72rem;font-weight:700;flex:1;min-width:0}
 .pcard .s{font-family:var(--mono);font-size:.68rem;font-weight:700;margin-inline-start:auto}
 .num{position:absolute;top:10px;inset-inline-start:10px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:.66rem;font-weight:700}
-.go{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1.5px solid var(--ink);border-radius:50%;background:#fff;font-size:1rem;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
-.go i{font-style:normal;line-height:1;transition:transform .25s ease}
+.go{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1.5px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.go svg{display:block;transition:transform .25s ease}
 .pcard:hover .go{background:var(--coral);border-color:var(--coral);color:#fff}
-.pcard:hover .go i{transform:translate(2px,-2px)}
+.pcard:hover .go svg{transform:translate(2px,-2px)}
 .pcard:hover{transform:translateY(-4px)}
 .pcard{transition:transform .25s ease}
 .s-green{color:#1e7e34}.s-blue{color:#1c5fd6}.s-orange{color:#c26a00}
