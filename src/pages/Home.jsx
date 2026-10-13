@@ -6,7 +6,6 @@ import Swoosh from '../components/Swoosh.jsx';
 import WorkGrid from '../components/WorkGrid.jsx';
 import Testimonials from '../components/Testimonials.jsx';
 import ShortsSection from '../components/ShortsSection.jsx';
-import HackerScene from '../components/HackerScene.jsx';
 import AboutSection from '../components/AboutSection.jsx';
 import Reveal from '../components/Reveal.jsx';
 
@@ -39,7 +38,6 @@ export default function Home({ lite }) {
           <ShortsSection />
         </div>
       </section>
-      <HackerScene motionOff={lite} />
       <AboutSection />
       <section className="section" aria-label={t.sections.sidequests}>
         <div className="wrap">
