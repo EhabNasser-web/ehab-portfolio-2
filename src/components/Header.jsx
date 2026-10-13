@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLang } from '../i18n/LangContext.jsx';
 
 const scribble = (
@@ -11,10 +11,15 @@ const scribble = (
   </svg>
 );
 
+const SECTIONS = [
+  { hash: '#work', key: 'work' },
+  { hash: '#sidequests', key: 'sidequests' },
+  { hash: '#about', key: 'about' }
+];
+
 export default function Header() {
   const { t } = useLang();
   const [open, setOpen] = useState(false);
-  const btnRef = useRef(null);
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -28,21 +33,17 @@ export default function Header() {
           <span>EHAB</span>
         </Link>
         <nav className="nav-links" aria-label="Primary">
-          <NavLink to="/" end className="nav-cell">{t.nav.work}{scribble}</NavLink>
-          <NavLink to="/sidequests" className="nav-cell">{t.nav.sidequests}{scribble}</NavLink>
-          <NavLink to="/about" className="nav-cell">{t.nav.about}{scribble}</NavLink>
+          {SECTIONS.map((s) => (
+            <Link key={s.key} to={`/${s.hash}`} className="nav-cell">{t.nav[s.key]}{scribble}</Link>
+          ))}
         </nav>
-        <button ref={btnRef} className="menu-btn" aria-expanded={open} aria-label={open ? t.nav.close : t.nav.menu} onClick={() => setOpen(!open)}>
+        <button className="menu-btn" aria-expanded={open} aria-label={open ? t.nav.close : t.nav.menu} onClick={() => setOpen(!open)}>
           {open ? '✕' : '☰'} {open ? t.nav.close : t.nav.menu}
         </button>
       </div>
       <div className={`mobile-menu ${open ? 'open' : ''}`}>
-        {[
-          { to: '/', label: t.nav.work },
-          { to: '/sidequests', label: t.nav.sidequests },
-          { to: '/about', label: t.nav.about }
-        ].map((l) => (
-          <Link key={l.to} to={l.to} onClick={() => setOpen(false)}>{l.label}</Link>
+        {SECTIONS.map((s) => (
+          <Link key={s.key} to={`/${s.hash}`} onClick={() => setOpen(false)}>{t.nav[s.key]}</Link>
         ))}
         <button className="pill" onClick={() => setOpen(false)}>{t.nav.close}</button>
       </div>

@@ -21,7 +21,7 @@ img,video{max-width:100%;display:block}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px;position:relative}
 /* thin grid lines framing content */
 .frame{border-inline:1px solid var(--line);background:transparent}
-.section{border-top:1px solid var(--line);padding:56px 0}
+.section{border-top:1px solid var(--line);padding:56px 0;scroll-margin-top:64px}
 .sec-title{text-align:center;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:900}
 .sec-title .em{font-family:var(--body)}
 .mono{font-family:var(--mono);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
