@@ -76,7 +76,7 @@ html:not(.paused) .dot{animation:drift linear infinite alternate}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:760px){.grid2{grid-template-columns:1fr}}
 .pcard{border:1.5px solid var(--ink);border-radius:var(--radius);overflow:hidden;text-decoration:none;background:#fff;position:relative;display:block}
-.pcard .cover{position:relative;aspect-ratio:16/10;background:#f4efe2;overflow:hidden}
+.pcard .cover{display:block;position:relative;aspect-ratio:16/10;background:#f4efe2;overflow:hidden}
 .pcard .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s ease}
 .pcard .cover img.alt{opacity:0}
 .pcard:hover .cover img.alt{opacity:1}
@@ -84,7 +84,7 @@ html:not(.paused) .dot{animation:drift linear infinite alternate}
 .pcard .tint{position:absolute;inset:0;background:var(--yellow);opacity:0;transition:opacity .3s}
 .pcard:hover .tint{opacity:.22}
 .pcard .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-top:1.5px solid var(--ink)}
-.pcard .t{font-family:var(--mono);font-size:.72rem;font-weight:700}
+.pcard .t{font-family:var(--mono);font-size:.72rem;font-weight:700;flex:1;min-width:0}
 .pcard .s{font-family:var(--mono);font-size:.68rem;font-weight:700;margin-inline-start:auto}
 .num{position:absolute;top:10px;inset-inline-start:10px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:.66rem;font-weight:700}
 .go{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1.5px solid var(--ink);border-radius:50%;background:#fff;font-size:1rem;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
