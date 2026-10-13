@@ -32,7 +32,7 @@ Email: `ehabnasserwork@gmail.com` (in `content.js` person.email, both languages)
 
 - Project covers: `public/images/projects/<slug>.svg` + `<slug>-alt.svg` (hover). Keep same filenames.
 - Portrait: drop `public/images/ehab.jpg` (fallback SVG shows until then).
-- Videos: `public/videos/short-1.mp4`, `short-2.mp4` (vertical 9:16, **under 15 MB each**) + posters `short-1.jpg`, `short-2.jpg`. The `.gitignore` excludes `*.mp4` so large files stay out of git — remove that line if you want them versioned.
+- Videos: `public/videos/short-1.mp4`, `short-2.mp4` (vertical 9:16) + posters `short-1.jpg`, `short-2.jpg` are committed as-is per the owner (each ~21MB). If you re-export them later, keep each under 15 MB when possible.
 - Your source files (`1011 (2).mp4` ~21.9MB, `1012.mp4` ~23.1MB) exceed the budget. Compress first:
 
 ```bash

@@ -3,5 +3,3 @@ node_modules/
 *.local
 .DS_Store
 Thumbs.db
-public/videos/*.mp4
-!public/videos/.gitkeep
