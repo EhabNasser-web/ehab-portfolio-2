@@ -17,8 +17,7 @@ export function useLiteMode() {
   return lite;
 }
 
-export function usePaused() {
-  const [paused, setPaused] = useState(() => {
+export function usePaused() {  const [paused, setPaused] = useState(() => {
     try {
       const saved = localStorage.getItem('ehab-anim');
       if (saved) return saved === 'paused';
@@ -37,4 +36,28 @@ export function usePaused() {
     return () => document.removeEventListener('visibilitychange', onShow);
   }, []);
   return [paused, setPaused];
+}
+
+export function useFinePointer() {
+  const [fine, setFine] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia?.('(pointer: fine)');
+    const update = () => setFine(!!mq?.matches);
+    update();
+    mq?.addEventListener?.('change', update);
+    return () => mq?.removeEventListener?.('change', update);
+  }, []);
+  return fine;
+}
+
+export function useReducedMotion() {
+  const [rm, setRm] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const update = () => setRm(!!mq?.matches);
+    update();
+    mq?.addEventListener?.('change', update);
+    return () => mq?.removeEventListener?.('change', update);
+  }, []);
+  return rm;
 }

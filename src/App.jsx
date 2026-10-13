@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { LangProvider } from './i18n/LangContext.jsx';
-import { useLiteMode, usePaused } from './hooks/useModes.js';
+import { useLiteMode, usePaused, useFinePointer, useReducedMotion } from './hooks/useModes.js';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Preloader from './components/Preloader.jsx';
@@ -16,11 +16,15 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage.jsx'));
 function Shell() {
   const lite = useLiteMode();
   const [paused, setPaused] = usePaused();
+  const fine = useFinePointer();
+  const reduced = useReducedMotion();
   const motionOff = lite || paused;
+  // Cursor only needs a mouse: independent from Lite (touch laptops still get it).
+  const cursorOff = paused || reduced || !fine;
   return (
     <BrowserRouter>
       <Preloader lite={lite} />
-      <Cursor disabled={motionOff} />
+      <Cursor disabled={cursorOff} />
       <Header />
       <Suspense fallback={<main id="main"><div className="wrap section"><p className="mono">…</p></div></main>}>
         <Routes>
