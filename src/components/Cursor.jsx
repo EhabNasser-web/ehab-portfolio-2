@@ -1,16 +1,28 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Morphing ball cursor + laser comet trail, driven by ONE rAF.
-// Over clickable elements the ball becomes a ring with a tiny plus inside.
-// Ball grows into a ring over interactive elements; native cursor hidden.
-// Crosshair = 2 full-viewport 1px lines moved via transform only.
-// Stops rAF when idle 150ms. Fully off when disabled (paused/reduced-motion/no mouse).
-export default function Cursor({ disabled }) {
+// Activates on the first real mouse/pen movement (reliable even on
+// touchscreen laptops where matchMedia('(pointer: fine)') may lie).
+// Ball grows into a ring with a tiny plus inside over clickable elements.
+// Native cursor hidden while active. Stops rAF when idle 150ms.
+export default function Cursor({ paused, reduced }) {
+  const off = paused || reduced;
+  const [mouse, setMouse] = useState(false);
   const dotRef = useRef(null);
   const canvasRef = useRef(null);
+
   useEffect(() => {
-    if (disabled) return;
-    if (!window.matchMedia?.('(pointer: fine)')?.matches) return;
+    if (off) return;
+    if (window.matchMedia?.('(pointer: fine)')?.matches) setMouse(true);
+    const onPoint = (e) => {
+      if (e.pointerType === 'mouse' || e.pointerType === 'pen') setMouse(true);
+    };
+    window.addEventListener('pointermove', onPoint, { passive: true });
+    return () => window.removeEventListener('pointermove', onPoint);
+  }, [off]);
+
+  useEffect(() => {
+    if (off || !mouse) return;
     const dot = dotRef.current;
     const cv = canvasRef.current;
     if (!dot || !cv) return;
@@ -34,8 +46,6 @@ export default function Cursor({ disabled }) {
       ty += (y - ty) * 0.4;
       const px = tx.toFixed(1), py = ty.toFixed(1);
       dot.style.transform = `translate(${px}px,${py}px)`;
-      hx.style.transform = `translateY(${py}px)`;
-      hy.style.transform = `translateX(${px}px)`;
       pts.push({ x: tx * sx(), y: ty * sy() });
       if (pts.length > 14) pts.shift();
       ctx.clearRect(0, 0, cv.width, cv.height);
@@ -79,8 +89,9 @@ export default function Cursor({ disabled }) {
       document.body.classList.remove('custom-cursor', 'cursor-hot');
       cancelAnimationFrame(raf);
     };
-  }, [disabled]);
-  if (disabled) return null;
+  }, [off, mouse]);
+
+  if (off || !mouse) return null;
   return (
     <>
       <canvas id="trail" ref={canvasRef} aria-hidden="true" />
