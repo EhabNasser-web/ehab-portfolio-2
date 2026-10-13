@@ -143,6 +143,22 @@ footer{border-top:1px solid var(--line);padding:48px 0 90px;text-align:center}
 .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;border-radius:12px}
 .crack-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .shatter-hint{display:block;margin-top:6px;font-size:.66rem;color:var(--muted)}
+/* hacker joke scene (transform/opacity motion only) */
+.hacker-stage{position:relative;max-width:560px;margin:14px auto 0;background:#fff;border:1.5px solid var(--ink);border-radius:var(--radius);padding:64px 18px 10px;box-shadow:7px 7px 0 var(--lime)}
+.hacker-stage svg{width:100%;height:auto;display:block}
+.bubble{position:absolute;top:12px;inset-inline-start:12px;max-width:75%;background:var(--yellow);border:1.5px solid var(--ink);border-radius:14px;padding:6px 14px;font-size:.78rem;animation:pop .3s ease}
+.bubble::after{content:"";position:absolute;bottom:-9px;inset-inline-start:34px;width:14px;height:14px;background:var(--yellow);border-inline-end:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:rotate(45deg)}
+@keyframes pop{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.codefloat span{position:absolute;bottom:44%;color:#1e7e34;font-weight:700;animation-name:rise;animation-timing-function:linear;animation-iteration-count:infinite;opacity:0}
+@keyframes rise{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-90px);opacity:0}}
+.cursor-blink{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hand-l{animation:typel .28s ease-in-out infinite alternate}
+.hand-r{animation:typel .28s ease-in-out infinite alternate-reverse}
+@keyframes typel{from{transform:translateY(0)}to{transform:translateY(-4px)}}
+.steam{animation:steam 2s ease-in-out infinite;opacity:0}
+.steam.s2{animation-delay:1s}
+@keyframes steam{0%{opacity:0;transform:translateY(3px)}40%{opacity:1}100%{opacity:0;transform:translateY(-3px)}}
 .tape{position:absolute;top:-13px;width:92px;height:26px;background:rgba(255,230,128,.92);border:1px solid rgba(20,20,20,.25);z-index:2}
 .tape.t1{left:18px;transform:rotate(-8deg)}
 .tape.t2{right:18px;transform:rotate(7deg);background:rgba(191,231,255,.92)}
