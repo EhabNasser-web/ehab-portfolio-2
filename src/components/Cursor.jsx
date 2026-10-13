@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 
-// Coral dot + comet trail on ONE canvas. Stops rAF when idle 150ms.
+// Morphing ball cursor + laser comet trail on ONE canvas.
+// Ball grows into a ring over interactive elements; native cursor hidden.
+// Stops rAF when idle 150ms. Fully off when disabled (Lite/touch/paused).
 export default function Cursor({ disabled }) {
   const dotRef = useRef(null);
   const canvasRef = useRef(null);
@@ -10,6 +12,7 @@ export default function Cursor({ disabled }) {
     const dot = dotRef.current;
     const cv = canvasRef.current;
     if (!dot || !cv) return;
+    document.body.classList.add('custom-cursor');
     const ctx = cv.getContext('2d');
     const fit = () => {
       cv.width = Math.min(window.innerWidth, 800);
@@ -21,26 +24,28 @@ export default function Cursor({ disabled }) {
     window.addEventListener('resize', fit);
     let x = -100, y = -100, tx = -100, ty = -100;
     let pts = [];
-    let raf = 0, idleTimer = 0, running = false;
-    const scaleX = () => cv.width / window.innerWidth;
-    const scaleY = () => cv.height / window.innerHeight;
+    let raf = 0, idleAt = 0, running = false;
+    const sx = () => cv.width / window.innerWidth;
+    const sy = () => cv.height / window.innerHeight;
     const draw = () => {
-      tx += (x - tx) * 0.35;
-      ty += (y - ty) * 0.35;
-      dot.style.transform = `translate(${tx - 6}px,${ty - 6}px)`;
-      pts.push({ x: tx * scaleX(), y: ty * scaleY() });
-      if (pts.length > 10) pts.shift();
+      tx += (x - tx) * 0.4;
+      ty += (y - ty) * 0.4;
+      dot.style.transform = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px)`;
+      pts.push({ x: tx * sx(), y: ty * sy() });
+      if (pts.length > 14) pts.shift();
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.lineCap = 'round';
-      for (let i = 1; i < pts.length; i++) {
-        ctx.strokeStyle = `rgba(240,75,75,${(i / pts.length) * 0.6})`;
-        ctx.lineWidth = (i / pts.length) * 7;
+      const n = pts.length;
+      for (let i = 1; i < n; i++) {
+        const k = i / n;
+        ctx.strokeStyle = `rgba(240,75,75,${(k * k * 0.75).toFixed(3)})`;
+        ctx.lineWidth = Math.max(0.5, k * 4);
         ctx.beginPath();
         ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
         ctx.lineTo(pts[i].x, pts[i].y);
         ctx.stroke();
       }
-      if (performance.now() - idleTimer > 150) {
+      if (performance.now() - idleAt > 150) {
         running = false;
         ctx.clearRect(0, 0, cv.width, cv.height);
         return;
@@ -48,18 +53,25 @@ export default function Cursor({ disabled }) {
       raf = requestAnimationFrame(draw);
     };
     const kick = () => {
-      idleTimer = performance.now();
+      idleAt = performance.now();
       if (!running) { running = true; raf = requestAnimationFrame(draw); }
     };
     const onMove = (e) => {
-      if (e.target?.closest?.('input,textarea,select')) { dot.style.opacity = '0'; }
-      else dot.style.opacity = '1';
+      const typing = e.target?.closest?.('input,textarea,select');
+      dot.style.opacity = typing ? '0' : '1';
       x = e.clientX; y = e.clientY; kick();
     };
+    const onOver = (e) => {
+      const hot = !!e.target?.closest?.('a,button,.hcard');
+      document.body.classList.toggle('cursor-hot', hot);
+    };
     window.addEventListener('mousemove', onMove, { passive: true });
+    document.addEventListener('mouseover', onOver, { passive: true });
     return () => {
       window.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseover', onOver);
       window.removeEventListener('resize', fit);
+      document.body.classList.remove('custom-cursor', 'cursor-hot');
       cancelAnimationFrame(raf);
     };
   }, [disabled]);
@@ -67,7 +79,9 @@ export default function Cursor({ disabled }) {
   return (
     <>
       <canvas id="trail" ref={canvasRef} aria-hidden="true" />
-      <div className="cursor-dot" ref={dotRef} aria-hidden="true" />
+      <div className="cursor-dot" ref={dotRef} aria-hidden="true">
+        <span className="cursor-core" />
+      </div>
     </>
   );
 }

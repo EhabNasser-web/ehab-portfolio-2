@@ -85,15 +85,27 @@ html:not(.paused) .dot{animation:drift linear infinite alternate}
 .pcard:hover .tint{opacity:.22}
 .pcard .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-top:1.5px solid var(--ink)}
 .pcard .t{font-family:var(--mono);font-size:.72rem;font-weight:700}
-.pcard .s{font-family:var(--mono);font-size:.68rem;font-weight:700}
+.pcard .s{font-family:var(--mono);font-size:.68rem;font-weight:700;margin-inline-start:auto}
+.num{position:absolute;top:10px;inset-inline-start:10px;background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:2px 10px;font-size:.66rem;font-weight:700}
+.go{display:grid;place-items:center;width:32px;height:32px;flex:none;border:1.5px solid var(--ink);border-radius:50%;background:#fff;font-size:1rem;transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+.go i{font-style:normal;line-height:1;transition:transform .25s ease}
+.pcard:hover .go{background:var(--coral);border-color:var(--coral);color:#fff}
+.pcard:hover .go i{transform:translate(2px,-2px)}
+.pcard:hover{transform:translateY(-4px)}
+.pcard{transition:transform .25s ease}
 .s-green{color:#1e7e34}.s-blue{color:#1c5fd6}.s-orange{color:#c26a00}
 .badge-demo{display:inline-block;background:#ff8a00;color:#fff;font-family:var(--mono);font-size:.62rem;padding:2px 8px;border-radius:999px;margin-inline-start:8px;vertical-align:middle}
 /* reveal */
 .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .rv.in{opacity:1;transform:none}
 html.paused .rv{opacity:1;transform:none;transition:none}
-/* cursor */
-.cursor-dot{position:fixed;top:0;left:0;width:12px;height:12px;border-radius:50%;background:var(--coral);z-index:120;pointer-events:none;will-change:transform}
+/* cursor: morphing ball + laser trail (desktop only) */
+body.custom-cursor, body.custom-cursor a, body.custom-cursor button,
+body.custom-cursor .pcard, body.custom-cursor .hcard{cursor:none}
+body.custom-cursor input,body.custom-cursor textarea,body.custom-cursor select{cursor:text}
+.cursor-dot{position:fixed;top:0;left:0;z-index:120;pointer-events:none;will-change:transform;margin:-7px 0 0 -7px}
+.cursor-core{display:block;width:14px;height:14px;border-radius:50%;background:var(--coral);border:2px solid transparent;transition:transform .18s ease,background-color .18s ease,border-color .18s ease}
+body.cursor-hot .cursor-core{transform:scale(2.3);background:rgba(240,75,75,.10);border-color:var(--coral)}
 #trail{position:fixed;inset:0;z-index:119;pointer-events:none}
 .card-pill{position:fixed;top:0;left:0;background:var(--yellow);border:1.5px solid var(--ink);border-radius:999px;padding:4px 14px;font-family:var(--mono);font-size:.7rem;font-weight:700;z-index:118;pointer-events:none;opacity:0;will-change:transform}
 /* banner + footer */

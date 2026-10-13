@@ -13,7 +13,7 @@ export function setPill(text, x, y) {
   pillEl.style.transform = `translate(${x + 14}px,${y - 14}px)`;
 }
 
-function Card({ p, labelView, labelPlay }) {
+function Card({ p, labelView, labelPlay, index }) {
   const ref = useRef(null);
   const label = p.realVideo ? labelPlay : labelView;
   useEffect(() => {
@@ -39,10 +39,12 @@ function Card({ p, labelView, labelPlay }) {
           <img className="base" src={p.cover} alt={`${p.title} cover`} width="640" height="400" loading="lazy" onError={(e) => { e.currentTarget.style.opacity = '0'; }} />
           <img className="alt" src={p.coverAlt} alt="" aria-hidden="true" width="640" height="400" loading="lazy" onError={(e) => { e.currentTarget.style.opacity = '0'; }} />
           <span className="tint" aria-hidden="true" />
+          <span className="num mono" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
         </span>
         <span className="row">
           <span className="t">{p.title}{p.demo && <span className="badge-demo">DEMO</span>}</span>
           <span className={`s ${color}`}>{p.status}</span>
+          <span className="go" aria-hidden="true"><i>↗</i></span>
         </span>
       </Link>
     </Reveal>
@@ -55,8 +57,8 @@ export default function WorkGrid({ projects }) {
     <>
       <div id="card-pill" className="card-pill" aria-hidden="true" />
       <div className="grid2">
-        {projects.map((p) => (
-          <Card key={p.slug} p={p} labelView={t.cardLabel.view} labelPlay={t.cardLabel.play} />
+        {projects.map((p, i) => (
+          <Card key={p.slug} p={p} index={i} labelView={t.cardLabel.view} labelPlay={t.cardLabel.play} />
         ))}
       </div>
     </>
