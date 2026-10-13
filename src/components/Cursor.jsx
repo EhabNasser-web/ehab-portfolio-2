@@ -77,7 +77,7 @@ export default function Cursor({ paused, reduced }) {
       x = e.clientX; y = e.clientY; kick();
     };
     const onOver = (e) => {
-      const hot = !!e.target?.closest?.('a,button,.hcard');
+      const hot = !!e.target?.closest?.('a,button,.hcard,.shatter');
       document.body.classList.toggle('cursor-hot', hot);
     };
     window.addEventListener('mousemove', onMove, { passive: true });

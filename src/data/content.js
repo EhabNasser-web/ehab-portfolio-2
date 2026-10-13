@@ -275,7 +275,7 @@ export const content = {
     footer: { cta: "Let's build something useful.", note: 'Alexandria, Egypt — open to internships & freelance automation work.' },
     toggle: { on: 'animations: on', off: 'animations: paused', lang: 'عربي' },
     projectPage: { problem: 'Problem', built: 'What I built', how: 'How it works', result: 'Result', next: 'Next project', back: 'All work', meta: { role: 'Role', year: 'Year', tools: 'Tools' } },
-    misc: { demo: 'DEMO', skip: 'Skip to content', lightboxClose: 'Close video', portraitAlt: 'Portrait placeholder for Ehab Nasser', videoFallback: 'Video file not added yet — drop it in /public/videos/', expTitle: 'Experience', eduTitle: 'Education', skillsTitle: 'What I do', learningTitle: 'Learning now', contactTitle: 'Say hi', shortsTitle: 'Motion shorts', experimentsTitle: 'Experiments', tapToPlay: 'Tap to play' }
+    misc: { demo: 'DEMO', skip: 'Skip to content', lightboxClose: 'Close video', portraitAlt: 'Portrait placeholder for Ehab Nasser', videoFallback: 'Video file not added yet — drop it in /public/videos/', expTitle: 'Experience', eduTitle: 'Education', skillsTitle: 'What I do', learningTitle: 'Learning now', contactTitle: 'Say hi', shortsTitle: 'Motion shorts', experimentsTitle: 'Experiments', tapToPlay: 'Tap to play', shatterHint: 'psst — click the photo' }
   },
   ar: {
     dir: 'rtl',
@@ -332,6 +332,6 @@ export const content = {
     footer: { cta: 'يلا نبني حاجة مفيدة.', note: 'الإسكندرية، مصر — متاح لتدريب وشغل أتمتة حر.' },
     toggle: { on: 'الأنيميشن: شغال', off: 'الأنيميشن: واقف', lang: 'EN' },
     projectPage: { problem: 'المشكلة', built: 'اللي بنيته', how: 'إزاي شغال', result: 'النتيجة', next: 'المشروع التالي', back: 'كل الشغل', meta: { role: 'الدور', year: 'السنة', tools: 'الأدوات' } },
-    misc: { demo: 'تجريبي', skip: 'تخطَّ إلى المحتوى', lightboxClose: 'إغلاق الفيديو', portraitAlt: 'صورة placeholder لإيهاب ناصر', videoFallback: 'ملف الفيديو لسه متضافش — حطه في /public/videos/', expTitle: 'الخبرة', eduTitle: 'التعليم', skillsTitle: 'بعمل إيه', learningTitle: 'أتعلم دلوقتي', contactTitle: 'قول أهلًا', shortsTitle: 'موشن شورتس', experimentsTitle: 'تجارب', tapToPlay: 'دوس للتشغيل' }
+    misc: { demo: 'تجريبي', skip: 'تخطَّ إلى المحتوى', lightboxClose: 'إغلاق الفيديو', portraitAlt: 'صورة placeholder لإيهاب ناصر', videoFallback: 'ملف الفيديو لسه متضافش — حطه في /public/videos/', expTitle: 'الخبرة', eduTitle: 'التعليم', skillsTitle: 'بعمل إيه', learningTitle: 'أتعلم دلوقتي', contactTitle: 'قول أهلًا', shortsTitle: 'موشن شورتس', experimentsTitle: 'تجارب', tapToPlay: 'دوس للتشغيل', shatterHint: 'دوس على الصورة' }
   }
 };
