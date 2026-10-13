@@ -1,24 +1,19 @@
 import { useEffect, useRef } from 'react';
 
-// Morphing ball cursor + laser comet trail + crosshair, all driven by ONE rAF.
+// Morphing ball cursor + laser comet trail, driven by ONE rAF.
+// Over clickable elements the ball becomes a ring with a tiny plus inside.
 // Ball grows into a ring over interactive elements; native cursor hidden.
 // Crosshair = 2 full-viewport 1px lines moved via transform only.
 // Stops rAF when idle 150ms. Fully off when disabled (paused/reduced-motion/no mouse).
 export default function Cursor({ disabled }) {
   const dotRef = useRef(null);
   const canvasRef = useRef(null);
-  const crossRef = useRef(null);
-  const hxRef = useRef(null);
-  const hyRef = useRef(null);
   useEffect(() => {
     if (disabled) return;
     if (!window.matchMedia?.('(pointer: fine)')?.matches) return;
     const dot = dotRef.current;
     const cv = canvasRef.current;
-    const cross = crossRef.current;
-    const hx = hxRef.current;
-    const hy = hyRef.current;
-    if (!dot || !cv || !cross || !hx || !hy) return;
+    if (!dot || !cv) return;
     document.body.classList.add('custom-cursor');
     const ctx = cv.getContext('2d');
     const fit = () => {
@@ -58,34 +53,28 @@ export default function Cursor({ disabled }) {
       if (performance.now() - idleAt > 150) {
         running = false;
         ctx.clearRect(0, 0, cv.width, cv.height);
-        cross.style.opacity = '0';
         return;
       }
       raf = requestAnimationFrame(draw);
     };
     const kick = () => {
       idleAt = performance.now();
-      cross.style.opacity = '1';
       if (!running) { running = true; raf = requestAnimationFrame(draw); }
     };
     const onMove = (e) => {
       const typing = e.target?.closest?.('input,textarea,select');
       dot.style.opacity = typing ? '0' : '1';
-      cross.style.opacity = typing ? '0' : '1';
       x = e.clientX; y = e.clientY; kick();
     };
     const onOver = (e) => {
       const hot = !!e.target?.closest?.('a,button,.hcard');
       document.body.classList.toggle('cursor-hot', hot);
     };
-    const onLeave = () => { cross.style.opacity = '0'; };
     window.addEventListener('mousemove', onMove, { passive: true });
     document.addEventListener('mouseover', onOver, { passive: true });
-    document.documentElement.addEventListener('mouseleave', onLeave);
     return () => {
       window.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseover', onOver);
-      document.documentElement.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('resize', fit);
       document.body.classList.remove('custom-cursor', 'cursor-hot');
       cancelAnimationFrame(raf);
@@ -95,12 +84,9 @@ export default function Cursor({ disabled }) {
   return (
     <>
       <canvas id="trail" ref={canvasRef} aria-hidden="true" />
-      <div className="cross" ref={crossRef} aria-hidden="true">
-        <span className="ch-x" ref={hxRef} />
-        <span className="ch-y" ref={hyRef} />
-      </div>
       <div className="cursor-dot" ref={dotRef} aria-hidden="true">
         <span className="cursor-core" />
+        <span className="cursor-plus" />
       </div>
     </>
   );
