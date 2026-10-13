@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export default function Preloader({ lite }) {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    if (lite) return;
+    if (lite) { setShow(false); return; }
     let done = false;
     try { done = sessionStorage.getItem('ehab-pre') === '1'; } catch {}
     if (done) return;

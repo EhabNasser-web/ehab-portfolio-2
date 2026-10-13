@@ -6,14 +6,18 @@ export default function Reveal({ children, className = '', as: Tag = 'div' }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (!('IntersectionObserver' in window)) { el.classList.add('in'); return; }
+    const show = () => el.classList.add('in');
+    if (!('IntersectionObserver' in window)) { show(); return; }
+    let done = false;
     const io = new IntersectionObserver((es) => {
       es.forEach((e) => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting) { done = true; show(); io.disconnect(); }
       });
     }, { threshold: 0.12 });
     io.observe(el);
-    return () => io.disconnect();
+    // Safety: never leave content invisible if IO never fires (hidden tab, odd browsers).
+    const t = setTimeout(() => { if (!done) { show(); io.disconnect(); } }, 1500);
+    return () => { io.disconnect(); clearTimeout(t); };
   }, []);
   return <Tag ref={ref} className={`rv ${className}`}>{children}</Tag>;
 }
