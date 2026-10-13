@@ -3,6 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "description": "Ehab Nasser — Junior AI Automation & Agentic Engineer portfolio (EN/AR)",
+  "engines": {
+    "node": "20.x",
+    "npm": "10.x"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
